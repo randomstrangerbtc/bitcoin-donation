@@ -6,10 +6,11 @@
 <meta name="theme-color" content="#111111">
 <meta name="description" content="No sob story. Just vibes and satoshis. Help a random stranger get 1 BTC.">
 <title>Help a Random Stranger Get 1 BTC</title>
+
 <style>
 :root {
-  --bg: #111111;
-  --card: #1d1d1d;
+  --bg: #111;
+  --card: #1c1c1c;
   --text: #f7f4ed;
   --muted: #bdb8ad;
   --orange: #f7931a;
@@ -18,12 +19,14 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
-  padding: 28px 16px 36px;
-  background: radial-gradient(ellipse at top, #29231b 0%, var(--bg) 58%);
+  padding: 24px 14px 36px;
+  background: radial-gradient(ellipse at top, #30251a, var(--bg) 60%);
   color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
@@ -33,11 +36,11 @@ body {
 main {
   width: 100%;
   max-width: 760px;
-  margin: 0 auto;
+  margin: auto;
 }
 
 h1 {
-  margin: 12px 0;
+  margin: 14px 0;
   font-size: clamp(2rem, 7vw, 3.7rem);
   line-height: 1.08;
   font-weight: 900;
@@ -55,12 +58,12 @@ h2 { line-height: 1.25; }
 }
 
 .card {
-  margin: 18px 0;
+  margin: 20px 0;
   padding: 26px;
   border: 1px solid var(--border);
   border-radius: 20px;
   background: rgba(255,255,255,.045);
-  box-shadow: 0 12px 36px rgba(0,0,0,.12);
+  box-shadow: 0 12px 36px rgba(0,0,0,.15);
 }
 
 .meme {
@@ -97,6 +100,8 @@ h2 { line-height: 1.25; }
   justify-content: center;
   margin: 24px 0;
 }
+
+a { color: var(--orange); }
 
 .button {
   display: inline-block;
@@ -156,8 +161,12 @@ h2 { line-height: 1.25; }
 }
 
 .qr-box {
-  width: 260px;
+  width: 284px;
   max-width: 100%;
+  min-height: 284px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 18px auto;
   padding: 12px;
   border-radius: 16px;
@@ -168,6 +177,14 @@ h2 { line-height: 1.25; }
   display: block;
   width: 100%;
   height: auto;
+  image-rendering: pixelated;
+}
+
+#qrFallback {
+  display: none;
+  color: #222;
+  padding: 12px;
+  font-size: .9rem;
 }
 
 #copyStatus {
@@ -198,156 +215,159 @@ footer {
 }
 </style>
 </head>
+
 <body>
 <main>
-<header>
-  <h1>HELP A RANDOM<br>STRANGER GET <span class="orange">1 BTC.</span></h1>
-  <p class="subtitle">
-    No sob story. No fake promises. Just one random human,
-    one ridiculous goal, and the internet.
-  </p>
-</header>
-<section class="card meme" aria-label="Bitcoin meme">
-  <div class="emoji" aria-hidden="true">🧑‍💻</div>
-  <div class="sign">1 BTC? 🥺👉👈</div>
-  <p>me explaining my financial strategy to the internet</p>
-</section>
-<nav class="cta-row" aria-label="Main actions">
-  <a class="button" href="#donate">₿ DONATE A FEW SATS</a>
+  <header>
+    <h1>HELP A RANDOM<br>STRANGER GET <span class="orange">1 BTC.</span></h1>
+    <p class="subtitle">
+      No sob story. No fake promises. Just one random human,
+      one ridiculous goal, and the internet.
+    </p>
+  </header>
 
+  <section class="card meme" aria-label="Bitcoin meme">
+    <div class="emoji" aria-hidden="true">🧑‍💻</div>
+    <div class="sign">1 BTC? 🥺👉👈</div>
+    <p>me explaining my financial strategy to the internet</p>
+  </section>
 
-<button class="button secondary" id="shareButton" type="button">
-    ↗ SHARE THE MADNESS
-  </button>
-</nav>
-<section class="card">
-  <h2>THE ROAD TO 1 BTC</h2>
-  <h3 class="orange" id="amount">Loading Bitcoin data...</h3>
-  <div
-    class="progress-track"
-    role="progressbar"
-    aria-label="Bitcoin fundraising progress"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    aria-valuenow="0">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-  <p class="small" id="progressText">Checking the Bitcoin blockchain...</p>
-  <p class="small">Live data provided by a public Bitcoin blockchain API.</p>
-</section>
-<section class="card">
-  <h2>WHY DOES THIS EXIST?</h2>
-  <p>Can the internet help a stranger reach one Bitcoin, a few satoshis at a time?</p>
-  <p>No emergency. No guaranteed outcome. Just a public goal, a meme, and voluntary support.</p>
-</section>
-<section class="card" id="donate">
-  <h2>DONATE A FEW SATOSHIS ₿</h2>
-  <p>Send BTC directly to this address. Every satoshi counts!</p>
-  <div class="qr-box" id="qrBox">
-    <img id="btcQr" alt="QR code for Bitcoin donations">
-  </div>
-Bitcoin address
+  <nav class="cta-row" aria-label="Main actions">
+    <a class="button" href="#donate">₿ DONATE A FEW SATS</a>
+    <button class="button secondary" id="shareButton" type="button">
+      ↗ SHARE THE MADNESS
+    </button>
+  </nav>
 
-  <button class="button" id="copyButton" type="button">
-    COPY BTC ADDRESS
-  </button>
-  <p id="copyStatus" role="status" aria-live="polite"></p>
-  <p>
-    <a id="walletLink" href="bitcoin:bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv">
-      OPEN IN BITCOIN WALLET ₿
-    </a>
-  </p>
-  <p class="notice">
-    Donations are voluntary and irreversible. Check the address and network
-    in your wallet before sending. Never share your seed phrase or private key.
-  </p>
-</section>
-<p>Every sat counts. Sharing is free. Donations are voluntary.</p>
-<p class="small">Not financial advice. Not an investment. Just one internet side quest.</p>
-<footer>
-  HELP A RANDOM STRANGER GET 1 BTC · Built on memes. Powered by voluntary sats.
-</footer>
+  <section class="card">
+    <h2>THE ROAD TO 1 BTC</h2>
+    <h3 class="orange" id="amount">Loading Bitcoin data...</h3>
+
+    <div class="progress-track"
+         role="progressbar"
+         aria-label="Fundraising progress"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         aria-valuenow="0"
+         id="progressBar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <p class="small" id="progressText">Connecting to the Bitcoin network...</p>
+    <p class="small" id="updatedText">Live data provided by a public blockchain API.</p>
+  </section>
+
+  <section class="card">
+    <h2>WHY DOES THIS EXIST?</h2>
+    <p>Can the internet help a stranger reach one Bitcoin, a few satoshis at a time?</p>
+    <p>No emergency. No guaranteed outcome. Just a public goal, a meme, and voluntary support.</p>
+  </section>
+
+  <section class="card" id="donate">
+    <h2>DONATE A FEW SATOSHIS ₿</h2>
+    <p>Send BTC directly to this address. Every satoshi counts!</p>
+
+    <div class="qr-box">
+      <img id="btcQr"
+           alt="QR code for the Bitcoin donation address"
+           width="260"
+           height="260">
+      <div id="qrFallback">
+        QR code could not load.<br>
+        Please copy the Bitcoin address below.
+      </div>
+    </div>
+
+    <label class="small" for="btc">Bitcoin donation address</label>
+
+    <input
+      id="btc"
+      class="btc-address"
+      type="text"
+      value="bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv"
+      readonly
+      spellcheck="false"
+      autocomplete="off"
+    >
+
+    <button class="button" id="copyButton" type="button">
+      COPY BTC ADDRESS
+    </button>
+
+    <p id="copyStatus" role="status" aria-live="polite"></p>
+
+    <p>
+      <a id="walletLink"
+         href="bitcoin:bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv">
+        OPEN IN BITCOIN WALLET ₿
+      </a>
+    </p>
+
+    <p class="notice">
+      Donations are voluntary and irreversible. Check the address and
+      network in your wallet before sending. Never share your seed phrase
+      or private key.
+    </p>
+  </section>
+
+  <p>Every sat counts. Sharing is free. Donations are voluntary.</p>
+  <p class="small">Not financial advice. Not an investment. Just one internet side quest.</p>
+
+  <footer>
+    HELP A RANDOM STRANGER GET 1 BTC · Built on memes. Powered by voluntary sats.
+  </footer>
 </main>
+
 <script>
 "use strict";
 
-const donationAddress = "bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv";
-const goalSatoshis = 100000000;
-const satoshisPerBTC = 100000000;
-
+const btcAddress = "bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv";
 const addressInput = document.getElementById("btc");
-const copyButton = document.getElementById("copyButton");
-const copyStatus = document.getElementById("copyStatus");
 const qrImage = document.getElementById("btcQr");
-const qrBox = document.getElementById("qrBox");
+const qrFallback = document.getElementById("qrFallback");
+const copyStatus = document.getElementById("copyStatus");
+const copyButton = document.getElementById("copyButton");
 const walletLink = document.getElementById("walletLink");
 
-addressInput.value = donationAddress;
-walletLink.href = "bitcoin:" + donationAddress;
+addressInput.value = btcAddress;
+walletLink.href = "bitcoin:" + btcAddress;
 
-// Generate the QR code through a public QR service.
-qrImage.src =
-  "https://quickchart.io/qr?size=300&margin=2&text=" +
-  encodeURIComponent("bitcoin:" + donationAddress);
+const qrPayload = encodeURIComponent("bitcoin:" + btcAddress);
+const qrSources = [
+  "https://quickchart.io/qr?size=300&margin=2&text=" + qrPayload,
+  "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + qrPayload
+];
+let qrSourceIndex = 0;
 
-qrImage.onerror = function () {
-  qrBox.style.display = "none";
-};
-
-// Read confirmed and unconfirmed incoming outputs from the public API.
-// This counts cumulative incoming outputs, not current balance or unique donors.
-async function updateDonationProgress() {
-  const amountEl = document.getElementById("amount");
-  const fillEl = document.getElementById("progressFill");
-  const textEl = document.getElementById("progressText");
-  const barEl = document.querySelector('[role="progressbar"]');
-
-  try {
-    const response = await fetch(
-      "https://mempool.space/api/address/" + donationAddress
-    );
-
-    if (!response.ok) {
-      throw new Error("Bitcoin API unavailable");
+function loadQr() {
+  qrImage.style.display = "block";
+  qrFallback.style.display = "none";
+  qrImage.onerror = function () {
+    qrSourceIndex++;
+    if (qrSourceIndex < qrSources.length) {
+      qrImage.src = qrSources[qrSourceIndex];
+    } else {
+      qrImage.style.display = "none";
+      qrFallback.style.display = "block";
     }
-
-    const data = await response.json();
-
-    const confirmedSats = data.chain_stats.funded_txo_sum;
-    const unconfirmedSats = data.mempool_stats.funded_txo_sum;
-
-    const totalSats = confirmedSats + unconfirmedSats;
-    const totalBTC = totalSats / satoshisPerBTC;
-    const percentage = Math.min((totalSats / goalSatoshis) * 100, 100);
-
-    amountEl.textContent = totalBTC.toFixed(8) + " BTC received";
-    fillEl.style.width = percentage + "%";
-    textEl.textContent =
-      percentage.toFixed(6) + "% of the 1 BTC goal · Updates every minute";
-
-    if (barEl) {
-      barEl.setAttribute("aria-valuenow", percentage.toFixed(6));
-    }
-  } catch (error) {
-    amountEl.textContent = "Live progress unavailable";
-    textEl.textContent = "Could not load blockchain data.
-
-
-Please try again later.";
-  }
+  };
+  qrImage.src = qrSources[qrSourceIndex];
 }
+
+loadQr();
 
 async function copyAddress() {
   copyStatus.textContent = "";
 
   try {
     if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(donationAddress);
-      copyStatus.textContent = "✓ Bitcoin address copied!";
+      await navigator.clipboard.writeText(btcAddress);
+      copyStatus.
+        textContent = "✓ Bitcoin address copied!";
       return;
     }
   } catch (error) {
-    // Use manual fallback.
+    // Continue to fallback.
   }
 
   addressInput.focus();
@@ -355,11 +375,10 @@ async function copyAddress() {
   addressInput.setSelectionRange(0, addressInput.value.length);
 
   try {
-    if (document.execCommand("copy")) {
-      copyStatus.textContent = "✓ Copy attempted. Paste to verify the address.";
-    } else {
-      copyStatus.textContent = "Address selected. Choose Copy from your device menu.";
-    }
+    const copied = document.execCommand("copy");
+    copyStatus.textContent = copied
+      ? "✓ Copy attempted. Paste to verify the address."
+      : "Address selected. Choose Copy from your device menu.";
   } catch (error) {
     copyStatus.textContent = "Address selected. Choose Copy from your device menu.";
   }
@@ -381,17 +400,64 @@ document.getElementById("shareButton").addEventListener("click", async function 
       await navigator.clipboard.writeText(window.location.href);
       alert("Website link copied. Share the madness!");
     } else {
-      alert("Copy the website link from your browser address bar to share it.");
+      alert("Copy the website link from your browser's address bar to share it.");
     }
   } catch (error) {
     if (error.name !== "AbortError") {
-      alert("Use your browser's Share option to share this page.");
+      alert("You can share the website using your browser's Share option.");
     }
   }
 });
 
-updateDonationProgress();
-setInterval(updateDonationProgress, 60000);
+async function updateBitcoinProgress() {
+  const amountEl = document.getElementById("amount");
+  const textEl = document.getElementById("progressText");
+  const updatedEl = document.getElementById("updatedText");
+  const fillEl = document.getElementById("progressFill");
+  const progressBar = document.getElementById("progressBar");
+
+  try {
+    const response = await fetch(
+      "https://mempool.space/api/address/" + btcAddress,
+      { cache: "no-store" }
+    );
+
+    if (!response.ok) {
+      throw new Error("Blockchain API returned " + response.status);
+    }
+
+    const data = await response.json();
+
+    const chain = data.chain_stats || {};
+    const mempool = data.mempool_stats || {};
+
+    const receivedSats =
+      Number(chain.funded_txo_sum || 0) +
+      Number(mempool.funded_txo_sum || 0);
+
+    const btcReceived = receivedSats / 100000000;
+    const percent = Math.min(btcReceived, 1) * 100;
+
+    amountEl.textContent = btcReceived.toFixed(8) + " BTC received";
+    fillEl.style.width = percent + "%";
+    progressBar.setAttribute("aria-valuenow", percent.toFixed(4));
+
+    textEl.textContent = percent.toFixed(6) +
+      "% of the 1 BTC goal reached.";
+
+    updatedEl.textContent =
+      "Updated " + new Date().toLocaleTimeString() +
+      ". Includes unconfirmed incoming transactions.";
+
+  } catch (error) {
+    amountEl.textContent = "Progress temporarily unavailable";
+    textEl.textContent = "The Bitcoin API could not be reached. Your donation address still works.";
+    updatedEl.textContent = "Please refresh later to retry.";
+  }
+}
+
+updateBitcoinProgress();
+setInterval(updateBitcoinProgress, 60000);
 </script>
 </body>
 </html>
