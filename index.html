@@ -448,11 +448,10 @@ async function updateBitcoinProgress() {
     updatedEl.textContent =
       "Updated " + new Date().toLocaleTimeString() +
       ". Includes unconfirmed incoming transactions.";
-
-  } catch (error) {
-    amountEl.textContent = "Progress temporarily unavailable";
-    textEl.textContent = "The Bitcoin API could not be reached. Your donation address still works.";
-    updatedEl.textContent = "Please refresh later to retry.";
+} catch (error) {
+    amountEl.textContent = "Live progress unavailable";
+    textEl.textContent =
+      "Could not load blockchain data. Please try again later.";
   }
 }
 
