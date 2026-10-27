@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help a Random Stranger Get 1 BTC</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#111;color:#fff5e7;font-family:Arial,sans-serif;text-align:center}
+header{padding:25px;color:#f7931a;font-weight:bold;letter-spacing:2px}
+main{max-width:800px;margin:40px auto;padding:25px}
+h1{font-size:clamp(38px,8vw,72px);line-height:1.05}
+h1 span{color:#f7931a}
+p{font-size:18px;line-height:1.7;color:#d1c8bd}
+.meme{margin:35px auto;background:#201b16;border:1px solid #51402c;border-radius:20px;padding:30px;max-width:500px}
+.face{font-size:100px}
+.sign{display:inline-block;background:#fff1d8;color:#21170c;padding:15px 25px;font-size:25px;font-weight:bold;transform:rotate(-2deg)}
+button,.donate{display:inline-block;border:0;border-radius:10px;padding:15px 22px;background:#f7931a;color:#17100a;font-size:17px;font-weight:bold;text-decoration:none;cursor:pointer;margin:8px}
+button:hover,.donate:hover{background:#ffb64d}
+.card{background:#1b1b1b;border:1px solid #39332b;border-radius:16px;padding:25px;margin:25px 0}
+.track{height:14px;background:#39332b;border-radius:20px;overflow:hidden;margin:20px 0}
+.fill{height:100%;width:0;background:#f7931a}
+.small{font-size:13px;color:#aaa}
+input{width:100%;padding:14px;border-radius:8px;border:1px solid #62513b;background:#111;color:white;margin:12px 0;font-size:16px}
+footer{padding:30px;color:#999;font-size:13px}
+</style>
+</head>
+<body>
+<header>RANDOM STRANGER ₿</header>
+<main>
+<div style="color:#f7931a;font-weight:bold">THE INTERNET SIDE QUEST</div>
+<h1>HELP A RANDOM STRANGER GET <span>1 BTC.</span></h1>
+<p>No sob story. No fake promises. Just one random human, one ridiculous goal, and the internet.</p>
+<div class="meme">
+<div class="face">🧑‍💻</div>
+<div class="sign">1 BTC? 🥺👉👈</div>
+<p>me explaining my financial strategy to the internet</p>
+</div>
+₿ DONATE A FEW SATS
+↗ SHARE THE MADNESS
+<div class="card">
+<h2>THE ROAD TO 1 BTC</h2>
+<h3 id="amount" style="color:#f7931a">0.00000000 BTC raised</h3>
+<div class="track"><div class="fill"></div></div>
+<p class="small">0% complete. The journey begins at zero.</p>
+</div>
+<div class="card">
+<h2>WHY DOES THIS EXIST?</h2>
+<p>Can the internet help a stranger reach one Bitcoin, a few satoshis at a time?</p>
+<p>No emergency. No guaranteed outcome. Just a public goal, a meme, and voluntary support.</p>
+</div>
+<div class="card" id="donate">
+<h2>DONATE A FEW SATOSHIS ₿</h2>
+<p>Donations are not configured yet. The site owner must add a verified public Bitcoin address before accepting payments.</p>
+<input id="btc" placeholder="Bitcoin address will appear here" aria-label="Bitcoin address" readonly>
+<button onclick="copyAddress()">COPY BTC ADDRESS</button>
+<p class="small">Never share your seed phrase or private keys. Donate only what you can afford.</p>
+</div>
+<p>Every sat counts. Sharing is free. Donations are voluntary.</p>
+<p class="small">Not financial advice. Not an investment. Just one internet side quest.</p>
+</main>
+<footer>HELP A RANDOM STRANGER GET 1 BTC · Built on memes. Powered by voluntary sats.</footer>
+<script>
+function sharePage(){
+ if(navigator.share){
+  navigator.share({title:document.title,text:"Help a random stranger get 1 BTC. No sob story, just vibes and satoshis.",url:location.href}).catch(()=>{});
+ }else if(navigator.clipboard){
+  navigator.clipboard.writeText(location.href).then(()=>alert("Link copied! Share the madness."));
+ }else{
+  alert("Copy the website address from your browser to share it.");
+ }
+}
+function copyAddress(){
+ const a=document.getElementById("btc").value.trim();
+ if(!a){alert("Donations are not configured yet.");return;}
+ navigator.clipboard.writeText(a).then(()=>alert("Address copied. Verify it before sending."));
+}
+</script>
+</body>
+</html>
