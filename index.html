@@ -97,13 +97,16 @@ function copyAddress(){
  navigator.clipboard.writeText(a).then(()=>alert("Address copied. Verify it before sending."));
 }
 </script>
-const btcAddress = “bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv”;
+const btcAddress = "bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv";
 
-const qrImage = document.getElementById(“btcQr”);
-qrImage.src =
-“https://quickchart.io/qr?size=300&text=” +
-encodeURIComponent(“bitcoin:” + btcAddress);
+const qrImage = document.getElementById("btcQr");
 
+if (qrImage) {
+  qrImage.src =
+    "https://quickchart.io/qr?size=300&text=" +
+    encodeURIComponent("bitcoin:" + btcAddress);
+}
+</script>
 qrImage.onerror = function () {
 this.alt = “QR code unavailable. Please copy the Bitcoin address below.”;
 this.style.display = “none”;
