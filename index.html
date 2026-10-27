@@ -1,115 +1,378 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Help a Random Stranger Get 1 BTC</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#111;color:#fff5e7;font-family:Arial,sans-serif;text-align:center}
-header{padding:25px;color:#f7931a;font-weight:bold;letter-spacing:2px}
-main{max-width:800px;margin:40px auto;padding:25px}
-h1{font-size:clamp(38px,8vw,72px);line-height:1.05}
-h1 span{color:#f7931a}
-p{font-size:18px;line-height:1.7;color:#d1c8bd}
-.meme{margin:35px auto;background:#201b16;border:1px solid #51402c;border-radius:20px;padding:30px;max-width:500px}
-.face{font-size:100px}
-.sign{display:inline-block;background:#fff1d8;color:#21170c;padding:15px 25px;font-size:25px;font-weight:bold;transform:rotate(-2deg)}
-button,.donate{display:inline-block;border:0;border-radius:10px;padding:15px 22px;background:#f7931a;color:#17100a;font-size:17px;font-weight:bold;text-decoration:none;cursor:pointer;margin:8px}
-button:hover,.donate:hover{background:#ffb64d}
-.card{background:#1b1b1b;border:1px solid #39332b;border-radius:16px;padding:25px;margin:25px 0}
-.track{height:14px;background:#39332b;border-radius:20px;overflow:hidden;margin:20px 0}
-.fill{height:100%;width:0;background:#f7931a}
-.small{font-size:13px;color:#aaa}
-input{width:100%;padding:14px;border-radius:8px;border:1px solid #62513b;background:#111;color:white;margin:12px 0;font-size:16px}
-footer{padding:30px;color:#999;font-size:13px}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="No sob story. Just vibes and satoshis. Help a random stranger get 1 BTC.">
+  <title>Help a Random Stranger Get 1 BTC</title>
+  <style>
+    :root {
+      --bg: #111111;
+      --card: #1d1d1d;
+      --text: #f7f4ed;
+      --muted: #bdb8ad;
+      --orange: #f7931a;
+      --border: #514638;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      padding: 28px 16px 36px;
+      background:
+        radial-gradient(ellipse at top, #29231b 0%, var(--bg) 58%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    main {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 12px 0;
+      font-size: clamp(2rem, 7vw, 3.7rem);
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .orange { color: var(--orange); }
+
+    .subtitle {
+      max-width: 590px;
+      margin: 18px auto 28px;
+      color: var(--muted);
+    }
+
+    .card {
+      margin: 18px 0;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255,255,255,.045);
+      box-shadow: 0 12px 36px rgba(0,0,0,.12);
+    }
+
+    .meme {
+      max-width: 390px;
+      margin: 26px auto;
+      background: linear-gradient(135deg, #30271d, #1d1d1d);
+    }
+
+    .emoji {
+      font-size: 4.2rem;
+      line-height: 1.4;
+    }
+
+    .sign {
+      display: inline-block;
+      margin: 8px auto;
+      padding: 10px 16px;
+      background: #fff1bf;
+      color: #222;
+      border-radius: 5px;
+      font-size: 1.15rem;
+      transform: rotate(-2deg);
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin: 24px 0;
+    }
+
+    a { color: var(--orange); }
+
+    .button {
+      display: inline-block;
+      border: 0;
+      border-radius: 12px;
+      padding: 13px 20px;
+      background: var(--orange);
+      color: #18120a;
+      font-size: .95rem;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s ease, filter .15s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .button.secondary {
+      border: 1px solid #655541;
+      background: #29251f;
+      color: var(--text);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 14px;
+      margin: 16px 0 10px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #39352f;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--orange);
+    }
+
+    .btc-address {
+      display: block;
+      width: 100%;
+      margin: 16px 0 12px;
+      padding: 14px;
+      border: 1px solid #62533f;
+      border-radius: 10px;
+      background: #111;
+      color: var(--text);
+      font-family: monospace;
+      font-size: .88rem;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .qr-box {
+      width: 260px;
+      max-width: 100%;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 18px auto;
+      padding: 12px;
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    #btcQr {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    #copyStatus {
+      min-height: 1.5em;
+      color: var(--orange);
+      font-size: .9rem;
+    }
+
+    .notice {
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(247,147,26,.08);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 18px 12px 28px; }
+
+
+.card { padding: 20px 15px; }
+      .button { width: 100%; }
+      .cta-row { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
-<header>RANDOM STRANGER ₿</header>
 <main>
-<div style="color:#f7931a;font-weight:bold">THE INTERNET SIDE QUEST</div>
-<h1>HELP A RANDOM STRANGER GET <span>1 BTC.</span></h1>
-<p>No sob story. No fake promises. Just one random human, one ridiculous goal, and the internet.</p>
-<div class="meme">
-<div class="face">🧑‍💻</div>
-<div class="sign">1 BTC? 🥺👉👈</div>
-<p>me explaining my financial strategy to the internet</p>
+  <header>
+    <h1>HELP A RANDOM<br>STRANGER GET <span class="orange">1 BTC.</span></h1>
+    <p class="subtitle">
+      No sob story. No fake promises. Just one random human,
+      one ridiculous goal, and the internet.
+    </p>
+  </header>
+  <section class="card meme" aria-label="Bitcoin meme">
+    <div class="emoji" aria-hidden="true">🧑‍💻</div>
+    <div class="sign">1 BTC? 🥺👉👈</div>
+    <p>me explaining my financial strategy to the internet</p>
+  </section>
+  <nav class="cta-row" aria-label="Main actions">
+    <a class="button" href="#donate">₿ DONATE A FEW SATS</a>
+    <button class="button secondary" id="shareButton" type="button">
+      ↗ SHARE THE MADNESS
+    </button>
+  </nav>
+  <section class="card">
+    <h2>THE ROAD TO 1 BTC</h2>
+    <h3 class="orange" id="amount">0.00000000 BTC raised</h3>
+    <div
+      class="progress-track"
+      role="progressbar"
+      aria-label="Fundraising progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    >
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <p class="small" id="progressText">
+      0% complete. The journey begins at zero.
+    </p>
+    <p class="small">Progress is not connected to live blockchain data yet.</p>
+  </section>
+  <section class="card">
+    <h2>WHY DOES THIS EXIST?</h2>
+    <p>Can the internet help a stranger reach one Bitcoin, a few satoshis at a time?</p>
+    <p>No emergency. No guaranteed outcome. Just a public goal, a meme, and voluntary support.</p>
+  </section>
+  <section class="card" id="donate">
+    <h2>DONATE A FEW SATOSHIS ₿</h2>
+    <p>Send BTC directly to this address. Every satoshi counts!</p>
+<div class="qr-box">
+  <img id="btcQr" alt="QR code for the Bitcoin donation address">
 </div>
-₿ DONATE A FEW SATS
-↗ SHARE THE MADNESS
-<div class="card">
-<h2>THE ROAD TO 1 BTC</h2>
-<h3 id="amount" style="color:#f7931a">0.00000000 BTC raised</h3>
-<div class="track"><div class="fill"></div></div>
-<p class="small">0% complete. The journey begins at zero.</p>
-</div>
-<div class="card">
-<h2>WHY DOES THIS EXIST?</h2>
-<p>Can the internet help a stranger reach one Bitcoin, a few satoshis at a time?</p>
-<p>No emergency. No guaranteed outcome. Just a public goal, a meme, and voluntary support.</p>
-</div>
-<div class="card" id="donate">
-<h2>DONATE A FEW SATOSHIS ₿</h2>
-<p>Send BTC directly to this address. Every satoshi counts! ₿</p>
-<div style="text-align:center; margin:20px auto;">
-  <img
-    id="btcQr"
-    alt="QR code for Bitcoin donations"
-    width="240"
-    height="240"
-    style="max-width:100%; border-radius:16px; background:white; padding:12px;"
-  >
-</div>
+
+<label class="small" for="btc">Bitcoin address</label>
 <input
-id=“btc”
-value=“bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv”
-aria-label=“Bitcoin address”
-readonly
-style=“width:100%; box-sizing:border-box;”
-<p style="text-align:center;">
-  <button onclick="copyAddress()">COPY BTC ADDRESS</button>
-</p>
-<p style="text-align:center;">
-  <a href="bitcoin:bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv">
+  id="btc"
+  class="btc-address"
+  type="text"
+  value="bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv"
+  readonly
+  spellcheck="false"
+  autocomplete="off"
+>
+
+<button class="button" id="copyButton" type="button">
+  COPY BTC ADDRESS
+</button>
+<p id="copyStatus" role="status" aria-live="polite"></p>
+
+<p>
+  <a id="walletLink" href="bitcoin:bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv">
     OPEN IN BITCOIN WALLET ₿
   </a>
 </p>
-<p class="small">Scan the QR code with your Bitcoin wallet. Verify the address before sending.</p>
-</div>
-<p>Every sat counts. Sharing is free. Donations are voluntary.</p>
-<p class="small">Not financial advice. Not an investment. Just one internet side quest.</p>
+
+<p class="notice">
+  Donations are voluntary and irreversible. Check the address and
+  network in your wallet before sending. Never share your seed phrase
+  or private key.
+</p>
+  </section>
+  <p>Every sat counts. Sharing is free. Donations are voluntary.</p>
+  <p class="small">Not financial advice. Not an investment. Just one internet side quest.</p>
+  <footer>
+    HELP A RANDOM STRANGER GET 1 BTC · Built on memes. Powered by voluntary sats.
+  </footer>
 </main>
-<footer>HELP A RANDOM STRANGER GET 1 BTC · Built on memes. Powered by voluntary sats.</footer>
 <script>
-function sharePage(){
- if(navigator.share){
-  navigator.share({title:document.title,text:"Help a random stranger get 1 BTC. No sob story, just vibes and satoshis.",url:location.href}).catch(()=>{});
- }else if(navigator.clipboard){
-  navigator.clipboard.writeText(location.href).then(()=>alert("Link copied! Share the madness."));
- }else{
-  alert("Copy the website address from your browser to share it.");
- }
-}
-function copyAddress(){
- const a=document.getElementById("btc").value.trim();
- if(!a){alert("Donations are not configured yet.");return;}
- navigator.clipboard.writeText(a).then(()=>alert("Address copied. Verify it before sending."));
-}
-</script>
-const btcAddress = "bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv";
+  "use strict";
 
-const qrImage = document.getElementById("btcQr");
+  const btcAddress = "bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv";
 
-if (qrImage) {
+  const addressInput = document.getElementById("btc");
+  const copyButton = document.getElementById("copyButton");
+  const copyStatus = document.getElementById("copyStatus");
+  const qrImage = document.getElementById("btcQr");
+  const walletLink = document.getElementById("walletLink");
+
+  // Keep the displayed address, wallet link, and QR payload consistent.
+  addressInput.value = btcAddress;
+  walletLink.href = "bitcoin:" + btcAddress;
+
+  // QR image is generated by an external service.
+  // If that service fails, the address and copy button remain available.
   qrImage.src =
-    "https://quickchart.io/qr?size=300&text=" +
+    "https://quickchart.io/qr?size=300&margin=2&text=" +
     encodeURIComponent("bitcoin:" + btcAddress);
-}
+
+  qrImage.onerror = function () {
+    this.alt = "QR unavailable. Please use the Bitcoin address below.";
+    this.style.display = "none";
+    const qrBox = document.querySelector(".qr-box");
+    qrBox.style.display = "none";
+  };
+
+  async function copyAddress() {
+    copyStatus.textContent = "";
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(btcAddress);
+        copyStatus.
+
+
+textContent = "✓ Bitcoin address copied. Paste it into your wallet.";
+        return;
+      }
+    } catch (error) {
+      // Try the manual fallback below.
+    }
+
+    addressInput.focus();
+    addressInput.select();
+    addressInput.setSelectionRange(0, addressInput.value.length);
+
+    try {
+      const success = document.execCommand("copy");
+
+      if (success) {
+        copyStatus.textContent = "✓ Copy attempted. Paste to verify the address.";
+      } else {
+        copyStatus.textContent = "Address selected. Choose Copy from your device menu.";
+      }
+    } catch (error) {
+      copyStatus.textContent = "Address selected. Choose Copy from your device menu.";
+    }
+  }
+
+  copyButton.addEventListener("click", copyAddress);
+
+  document.getElementById("shareButton").addEventListener("click", async function () {
+    const shareData = {
+      title: "Help a Random Stranger Get 1 BTC",
+      text: "No sob story. Just vibes and satoshis.",
+      url: window.location.href
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Website link copied. Share the madness!");
+      } else {
+        alert("Copy the website link from your browser's address bar to share it.");
+      }
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        alert("You can share the website using your browser's Share option.");
+      }
+    }
+  });
 </script>
-qrImage.onerror = function () {
-this.alt = “QR code unavailable. Please copy the Bitcoin address below.”;
-this.style.display = “none”;
-};
 </body>
 </html>
