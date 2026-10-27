@@ -52,9 +52,30 @@ footer{padding:30px;color:#999;font-size:13px}
 <div class="card" id="donate">
 <h2>DONATE A FEW SATOSHIS ₿</h2>
 <p>Send BTC directly to this address. Every satoshi counts! ₿</p>
-<input id="btc" value="bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv" aria-label="Bitcoin address" readonly>
-<button onclick="copyAddress()">COPY BTC ADDRESS</button>
-<p class="small">Double-check the address in your wallet before sending.</p><p class="small">Never share your seed phrase or private keys. Donate only what you can afford.</p>
+<div style="text-align:center; margin:20px auto;">
+  <img
+    id="btcQr"
+    alt="QR code for Bitcoin donations"
+    width="240"
+    height="240"
+    style="max-width:100%; border-radius:16px; background:white; padding:12px;"
+  >
+</div>
+<input
+id=“btc”
+value=“bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv”
+aria-label=“Bitcoin address”
+readonly
+style=“width:100%; box-sizing:border-box;”
+<p style="text-align:center;">
+  <button onclick="copyAddress()">COPY BTC ADDRESS</button>
+</p>
+<p style="text-align:center;">
+  <a href="bitcoin:bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv">
+    OPEN IN BITCOIN WALLET ₿
+  </a>
+</p>
+<p class="small">Scan the QR code with your Bitcoin wallet. Verify the address before sending.</p>
 </div>
 <p>Every sat counts. Sharing is free. Donations are voluntary.</p>
 <p class="small">Not financial advice. Not an investment. Just one internet side quest.</p>
@@ -76,5 +97,10 @@ function copyAddress(){
  navigator.clipboard.writeText(a).then(()=>alert("Address copied. Verify it before sending."));
 }
 </script>
+const btcAddress = “bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv”;
+
+document.getElementById(“btcQr”).src =
+“https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=” +
+encodeURIComponent(“bitcoin:” + btcAddress);
 </body>
 </html>
