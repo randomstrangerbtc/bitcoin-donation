@@ -226,7 +226,9 @@ footer {
 
 <section class="card meme" aria-label="Bitcoin meme">
   <div class="emoji" aria-hidden="true">🧑‍💻</div>
-  <div class="sign">1 BTC? 🥺👉👈</div>
+
+
+<div class="sign">1 BTC? 🥺👉👈</div>
   <p>me explaining my financial strategy to the internet</p>
 </section>
 
@@ -380,7 +382,9 @@ async function copyAddress() {
 
   try {
     if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(btcAddress);
+
+
+await navigator.clipboard.writeText(btcAddress);
       copyStatus.textContent = "✓ Bitcoin address copied!";
       return;
     }
