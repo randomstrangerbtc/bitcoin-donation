@@ -99,8 +99,14 @@ function copyAddress(){
 </script>
 const btcAddress = “bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv”;
 
-document.getElementById(“btcQr”).src =
-“https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=” +
+const qrImage = document.getElementById(“btcQr”);
+qrImage.src =
+“https://quickchart.io/qr?size=300&text=” +
 encodeURIComponent(“bitcoin:” + btcAddress);
+
+qrImage.onerror = function () {
+this.alt = “QR code unavailable. Please copy the Bitcoin address below.”;
+this.style.display = “none”;
+};
 </body>
 </html>
