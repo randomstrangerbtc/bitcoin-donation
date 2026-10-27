@@ -19,9 +19,7 @@
 
 * { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -48,7 +46,6 @@ h1 {
 }
 
 h2 { line-height: 1.25; }
-
 .orange { color: var(--orange); }
 
 .subtitle {
@@ -218,110 +215,125 @@ footer {
 
 <body>
 <main>
-  <header>
-    <h1>HELP A RANDOM<br>STRANGER GET <span class="orange">1 BTC.</span></h1>
-    <p class="subtitle">
-      No sob story. No fake promises. Just one random human,
-      one ridiculous goal, and the internet.
-    </p>
-  </header>
 
-  <section class="card meme" aria-label="Bitcoin meme">
-    <div class="emoji" aria-hidden="true">🧑‍💻</div>
-    <div class="sign">1 BTC? 🥺👉👈</div>
-    <p>me explaining my financial strategy to the internet</p>
-  </section>
+<header>
+  <h1>HELP A RANDOM<br>STRANGER GET <span class="orange">1 BTC.</span></h1>
+  <p class="subtitle">
+    No sob story. No fake promises. Just one random human,
+    one ridiculous goal, and the internet.
+  </p>
+</header>
 
-  <nav class="cta-row" aria-label="Main actions">
-    <a class="button" href="#donate">₿ DONATE A FEW SATS</a>
-    <button class="button secondary" id="shareButton" type="button">
-      ↗ SHARE THE MADNESS
-    </button>
-  </nav>
+<section class="card meme" aria-label="Bitcoin meme">
+  <div class="emoji" aria-hidden="true">🧑‍💻</div>
+  <div class="sign">1 BTC? 🥺👉👈</div>
+  <p>me explaining my financial strategy to the internet</p>
+</section>
 
-  <section class="card">
-    <h2>THE ROAD TO 1 BTC</h2>
-    <h3 class="orange" id="amount">Loading Bitcoin data...</h3>
+<nav class="cta-row" aria-label="Main actions">
+  <a class="button" href="#donate">₿ DONATE A FEW SATS</a>
+  <button class="button secondary" id="shareButton" type="button">
+    ↗ SHARE THE MADNESS
+  </button>
+</nav>
 
-    <div class="progress-track"
-         role="progressbar"
-         aria-label="Fundraising progress"
-         aria-valuemin="0"
-         aria-valuemax="100"
-         aria-valuenow="0"
-         id="progressBar">
-      <div class="progress-fill" id="progressFill"></div>
+<section class="card">
+  <h2>THE ROAD TO 1 BTC</h2>
+
+  <h3 class="orange" id="amount">Loading Bitcoin data...</h3>
+
+  <p class="small" id="goalAmount">Loading goal progress...</p>
+
+  <div class="progress-track"
+       id="progressBar"
+       role="progressbar"
+       aria-label="Fundraising progress"
+       aria-valuemin="0"
+       aria-valuemax="100"
+       aria-valuenow="0">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <p class="small" id="progressText">
+    Connecting to the Bitcoin network...
+  </p>
+
+  <p class="small" id="donationStats">
+    Loading incoming payment statistics...
+  </p>
+
+  <p class="small" id="updatedText">
+    Live data provided by a public blockchain API.
+  </p>
+</section>
+
+<section class="card">
+  <h2>WHY DOES THIS EXIST?</h2>
+  <p>Can the internet help a stranger reach one Bitcoin, a few satoshis at a time?</p>
+  <p>No emergency. No guaranteed outcome. Just a public goal, a meme, and voluntary support.</p>
+</section>
+
+<section class="card" id="donate">
+  <h2>DONATE A FEW SATOSHIS ₿</h2>
+  <p>Send BTC directly to this address. Every satoshi counts!</p>
+
+  <div class="qr-box">
+    <img id="btcQr"
+         alt="QR code for the Bitcoin donation address"
+         width="260"
+         height="260">
+    <div id="qrFallback">
+      QR code could not load.<br>
+      Please copy the Bitcoin address below.
     </div>
+  </div>
 
-    <p class="small" id="progressText">Connecting to the Bitcoin network...</p>
-    <p class="small" id="updatedText">Live data provided by a public blockchain API.</p>
-  </section>
+  <label class="small" for="btc">Bitcoin donation address</label>
 
-  <section class="card">
-    <h2>WHY DOES THIS EXIST?</h2>
-    <p>Can the internet help a stranger reach one Bitcoin, a few satoshis at a time?</p>
-    <p>No emergency. No guaranteed outcome. Just a public goal, a meme, and voluntary support.</p>
-  </section>
+  <input
+    id="btc"
+    class="btc-address"
+    type="text"
+    value="bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv"
+    readonly
+    spellcheck="false"
+    autocomplete="off"
+  >
 
-  <section class="card" id="donate">
-    <h2>DONATE A FEW SATOSHIS ₿</h2>
-    <p>Send BTC directly to this address. Every satoshi counts!</p>
+  <button class="button" id="copyButton" type="button">
+    COPY BTC ADDRESS
+  </button>
 
-    <div class="qr-box">
-      <img id="btcQr"
-           alt="QR code for the Bitcoin donation address"
-           width="260"
-           height="260">
-      <div id="qrFallback">
-        QR code could not load.<br>
-        Please copy the Bitcoin address below.
-      </div>
-    </div>
+  <p id="copyStatus" role="status" aria-live="polite"></p>
 
-    <label class="small" for="btc">Bitcoin donation address</label>
+  <p>
+    <a id="walletLink"
+       href="bitcoin:bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv">
+      OPEN IN BITCOIN WALLET ₿
+    </a>
+  </p>
 
-    <input
-      id="btc"
-      class="btc-address"
-      type="text"
-      value="bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv"
-      readonly
-      spellcheck="false"
-      autocomplete="off"
-    >
+  <p class="notice">
+    Donations are voluntary and irreversible. Check the address and
+    network in your wallet before sending. Never share your seed phrase
+    or private key.
+  </p>
+</section>
 
-    <button class="button" id="copyButton" type="button">
-      COPY BTC ADDRESS
-    </button>
+<p>Every sat counts. Sharing is free. Donations are voluntary.</p>
+<p class="small">Not financial advice. Not an investment. Just one internet side quest.</p>
 
-    <p id="copyStatus" role="status" aria-live="polite"></p>
+<footer>
+  HELP A RANDOM STRANGER GET 1 BTC · Built on memes. Powered by voluntary sats.
+</footer>
 
-    <p>
-      <a id="walletLink"
-         href="bitcoin:bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv">
-        OPEN IN BITCOIN WALLET ₿
-      </a>
-    </p>
-
-    <p class="notice">
-      Donations are voluntary and irreversible. Check the address and
-      network in your wallet before sending. Never share your seed phrase
-      or private key.
-    </p>
-  </section>
-
-  <p>Every sat counts. Sharing is free. Donations are voluntary.</p>
-  <p class="small">Not financial advice. Not an investment. Just one internet side quest.</p>
-
-  <footer>
-    HELP A RANDOM STRANGER GET 1 BTC · Built on memes. Powered by voluntary sats.
-  </footer>
 </main>
 
 <script>
 "use strict";
 
 const btcAddress = "bc1qxf229xk5gw6wewylt6f7qg3eyzzhkzhhw8rmwv";
+
 const addressInput = document.getElementById("btc");
 const qrImage = document.getElementById("btcQr");
 const qrFallback = document.getElementById("qrFallback");
@@ -332,18 +344,23 @@ const walletLink = document.getElementById("walletLink");
 addressInput.value = btcAddress;
 walletLink.href = "bitcoin:" + btcAddress;
 
+// QR code with a backup provider.
 const qrPayload = encodeURIComponent("bitcoin:" + btcAddress);
+
 const qrSources = [
   "https://quickchart.io/qr?size=300&margin=2&text=" + qrPayload,
   "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + qrPayload
 ];
+
 let qrSourceIndex = 0;
 
 function loadQr() {
   qrImage.style.display = "block";
   qrFallback.style.display = "none";
+
   qrImage.onerror = function () {
     qrSourceIndex++;
+
     if (qrSourceIndex < qrSources.length) {
       qrImage.src = qrSources[qrSourceIndex];
     } else {
@@ -351,23 +368,24 @@ function loadQr() {
       qrFallback.style.display = "block";
     }
   };
+
   qrImage.src = qrSources[qrSourceIndex];
 }
 
 loadQr();
 
+// Copy the donation address.
 async function copyAddress() {
   copyStatus.textContent = "";
 
   try {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(btcAddress);
-      copyStatus.
-        textContent = "✓ Bitcoin address copied!";
+      copyStatus.textContent = "✓ Bitcoin address copied!";
       return;
     }
   } catch (error) {
-    // Continue to fallback.
+    // Try the fallback below.
   }
 
   addressInput.focus();
@@ -376,42 +394,51 @@ async function copyAddress() {
 
   try {
     const copied = document.execCommand("copy");
+
     copyStatus.textContent = copied
       ? "✓ Copy attempted. Paste to verify the address."
       : "Address selected. Choose Copy from your device menu.";
   } catch (error) {
-    copyStatus.textContent = "Address selected. Choose Copy from your device menu.";
+    copyStatus.textContent =
+      "Address selected. Choose Copy from your device menu.";
   }
 }
 
 copyButton.addEventListener("click", copyAddress);
 
-document.getElementById("shareButton").addEventListener("click", async function () {
-  const shareData = {
-    title: "Help a Random Stranger Get 1 BTC",
-    text: "No sob story. Just vibes and satoshis.",
-    url: window.location.href
-  };
+// Share the website.
+document.getElementById("shareButton").addEventListener(
+  "click",
+  async function () {
+    const shareData = {
+      title: "Help a Random Stranger Get 1 BTC",
+      text: "No sob story. Just vibes and satoshis.",
+      url: window.location.href
+    };
 
-  try {
-    if (navigator.share) {
-      await navigator.share(shareData);
-    } else if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(window.location.href);
-      alert("Website link copied. Share the madness!");
-    } else {
-      alert("Copy the website link from your browser's address bar to share it.");
-    }
-  } catch (error) {
-    if (error.name !== "AbortError") {
-      alert("You can share the website using your browser's Share option.");
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Website link copied. Share the madness!");
+      } else {
+        alert("Copy the website link from your browser's address bar.");
+      }
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        alert("You can share the website using your browser's Share option.");
+      }
     }
   }
-});
+);
 
+// Load donation progress from the public Bitcoin API.
 async function updateBitcoinProgress() {
   const amountEl = document.getElementById("amount");
+  const goalAmountEl = document.getElementById("goalAmount");
   const textEl = document.getElementById("progressText");
+  const statsEl = document.getElementById("donationStats");
   const updatedEl = document.getElementById("updatedText");
   const fillEl = document.getElementById("progressFill");
   const progressBar = document.getElementById("progressBar");
@@ -423,7 +450,7 @@ async function updateBitcoinProgress() {
     );
 
     if (!response.ok) {
-      throw new Error("Blockchain API returned " + response.status);
+      throw new Error("Bitcoin API returned HTTP " + response.status);
     }
 
     const data = await response.json();
@@ -431,32 +458,62 @@ async function updateBitcoinProgress() {
     const chain = data.chain_stats || {};
     const mempool = data.mempool_stats || {};
 
+    // Total incoming transaction outputs, in satoshis.
     const receivedSats =
       Number(chain.funded_txo_sum || 0) +
       Number(mempool.funded_txo_sum || 0);
 
     const btcReceived = receivedSats / 100000000;
-    const percent = Math.min(btcReceived, 1) * 100;
+    const goal = 1;
+    const percent = Math.min(btcReceived / goal, 1) * 100;
 
     amountEl.textContent = btcReceived.toFixed(8) + " BTC received";
-    fillEl.style.width = percent + "%";
-    progressBar.setAttribute("aria-valuenow", percent.toFixed(4));
 
-    textEl.textContent = percent.toFixed(6) +
-      "% of the 1 BTC goal reached.";
+    goalAmountEl.textContent =
+      btcReceived.toFixed(8) + " / 1.00000000 BTC";
+
+    fillEl.style.width = percent + "%";
+
+    progressBar.setAttribute(
+      "aria-valuenow",
+      percent.toFixed(4)
+    );
+
+    textEl.textContent =
+      percent.toFixed(6) + "% of the 1 BTC goal reached.";
+
+    // This counts transaction outputs, not individual donors.
+    const incomingOutputs =
+      Number(chain.funded_txo_count || 0) +
+      Number(mempool.funded_txo_count || 0);
+
+    statsEl.textContent =
+      "Incoming transaction outputs: " + incomingOutputs;
 
     updatedEl.textContent =
       "Updated " + new Date().toLocaleTimeString() +
       ". Includes unconfirmed incoming transactions.";
-} catch (error) {
-    amountEl.textContent = "Live progress unavailable";
+
+  } catch (error) {
+    amountEl.textContent = "Progress temporarily unavailable";
+
+    goalAmountEl.textContent =
+      "Goal: 1.00000000 BTC";
+
     textEl.textContent =
-      "Could not load blockchain data. Please try again later.";
+      "Could not load blockchain data. Your donation address still works.";
+
+    statsEl.textContent =
+      "Incoming payment statistics are temporarily unavailable.";
+
+    updatedEl.textContent =
+      "Please refresh later to retry.";
   }
 }
 
 updateBitcoinProgress();
 setInterval(updateBitcoinProgress, 60000);
 </script>
+
 </body>
 </html>
